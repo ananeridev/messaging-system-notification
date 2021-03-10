@@ -19,7 +19,7 @@ public class RegistrationPublisher {
     @ApiOperation(value = "Save a registration on system")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Registration saved"),
-            @ApiResponse(code = 500, message = "An exception occured"),
+            @ApiResponse(code = 500, message = "An exception occurred"),
     })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
