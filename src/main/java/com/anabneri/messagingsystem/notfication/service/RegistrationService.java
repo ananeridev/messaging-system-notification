@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,14 +23,16 @@ public class RegistrationService {
 
     public static final String SEND_A_REGISTRATION_TO_QUEUE = "Send a subscription %s to queue.";
     public static final String STATUS_NOT_FOUND = "Status not found";
-    public static final String CANNOT_SAVE_A_REGISTRATION_WITHOUT_STATUS = "Cannot save this register whitout status";
+    public static final String CANNOT_SAVE_A_REGISTRATION_WITHOUT_STATUS = "Cannot save this register whithout status";
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationService.class);
 
 
-    private RabbitTemplate rabbitTemplate;
-    private RegistrationRepository repository;
     private StatusRepository statusRepository;
     private ModelMapper mapper;
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    private RegistrationRepository repository;
 
     public RegistrationService(RegistrationRepository repository, StatusRepository statusRepository,
                                ModelMapper mapper, RabbitTemplate rabbitTemplate) {
