@@ -30,8 +30,6 @@ public class RegistrationService {
     private StatusRepository statusRepository;
     private ModelMapper mapper;
     private RabbitTemplate rabbitTemplate;
-
-    @Autowired
     private RegistrationRepository repository;
 
     public RegistrationService(RegistrationRepository repository, StatusRepository statusRepository,
