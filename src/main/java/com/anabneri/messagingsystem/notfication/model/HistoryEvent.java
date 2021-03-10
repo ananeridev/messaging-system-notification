@@ -1,14 +1,29 @@
 package com.anabneri.messagingsystem.notfication.model;
 
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
+@Table(name = "event_history")
 public class HistoryEvent {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Enumerated(EnumType.STRING)
     private Type type;
+
+    @ManyToOne
+    @JoinColumn(name = "subscription_id")
     private Registration registrationId;
+
+    @CreatedDate
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     public Integer getId() {

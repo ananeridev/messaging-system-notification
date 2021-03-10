@@ -1,10 +1,16 @@
 package com.anabneri.messagingsystem.notfication.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "status")
 public class Status {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String name;
 
     public Integer getId() {
