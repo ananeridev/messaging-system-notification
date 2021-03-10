@@ -14,12 +14,12 @@ public class ListenerAuditRegistration {
 
     @PrePersist
     public void onPrePersist(Registration registration) {
-        audit(Type.INSERT, registration);
+        audit(TypeEnum.INSERT, registration);
     }
 
     @PreUpdate
     public void onPreUpdate(Registration registration) {
-        audit(Type.UPDATE, registration);
+        audit(TypeEnum.UPDATE, registration);
     }
 
     @Transactional(MANDATORY)
