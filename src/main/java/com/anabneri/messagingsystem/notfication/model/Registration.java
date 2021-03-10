@@ -74,6 +74,10 @@ public class Registration {
         return Objects.hash(id, status, createdAt, updatedAt);
     }
 
+    @PrePersist
+    public void onPrePersist() {
+        setCreatedAt(LocalDateTime.now());
+    }
 
     public static Builder builder() {
         return new Builder();

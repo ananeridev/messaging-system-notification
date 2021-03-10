@@ -31,7 +31,7 @@ public class RegistrationTest {
     public static final String REGISTRATION_PURCHASED = "REGISTRATION_PURCHASED";
     private RegistrationRepository repository;
     private StatusRepository statusRepository;
-    private ModelMapperConfig mapper;
+    private ModelMapper mapper;
     private RabbitTemplate rabbitTemplate;
     private RegistrationService service;
 
@@ -42,7 +42,7 @@ public class RegistrationTest {
     public void setUp() {
         this.repository = mock(RegistrationRepository.class);
         this.statusRepository = mock(StatusRepository.class);
-        this.mapper = mock(ModelMapperConfig.class);
+        this.mapper = mock(ModelMapper.class);
         this.rabbitTemplate = mock(RabbitTemplate.class);
         this.service = new RegistrationService(repository, statusRepository, mapper, rabbitTemplate);
     }
@@ -52,7 +52,7 @@ public class RegistrationTest {
      void testSaveRegistrationPurchasedWithSuccess() {
         Status status = buildStatusEntity();
         RegistrationDTO registrationDTO = buildRegistrationDTO();
-        Registration registration = buildSubscriptionEntity();
+        Registration registration = buildRegistrationEntity();
 
         when(statusRepository.findByName(registration.getStatus().getName())).thenReturn(Optional.of(status));
         when(repository.save(registration)).thenReturn(registration);
@@ -74,7 +74,7 @@ public class RegistrationTest {
                 .id(REGISTRATION_ID)
                 .build();
 
-        when(repository.save(Registration)).thenReturn(Registration);
+        when(repository.save(registration)).thenReturn(registration);
         when(mapper.map(registrationDTO, Registration.class)).thenReturn(registration);
 
         service.saveRegistration(registrationDTO);
