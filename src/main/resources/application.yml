@@ -6,7 +6,7 @@ spring:
     active: prod
     include: swagger
   datasource:
-    url: jdbc:mysql://localhost:3306/registrations?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/registration?createDatabaseIfNotExist=true
     username: root
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
