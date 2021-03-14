@@ -1,30 +1,23 @@
 version: '3.4'
 services:
-  mysqldb:
-    image: mysql:5.7
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+  postgres:
+    image: postgres
     environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: registration
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: minhasenhasecreta
+      POSTGRES_DB: registration
     ports:
-      - "3306:3306"
-    volumes:
-      - db-data:/var/lib/mysql
-    networks:
-      - backend
-    healthcheck:
-      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
-      timeout: 20s
-      retries: 10
+      - "5432:5432"
 
   adminer:
     image: adminer
+    links:
+      - postgres
+    depends_on:
+      - postgres
     restart: always
     ports:
-      - 8080:8080
-    networks:
-      - backend
+      - 8081:8080
 
   rabbitmq:
     image: rabbitmq:management
@@ -42,13 +35,13 @@ services:
     environment:
       TZ: GMT
     ports:
-      - "8080:8080"
+      - "9003:8080"
     networks:
       - backend
     depends_on:
-      - mysqldb
+      - postgres
     links:
-      - "mysqldb:database"
+      - "postgres:database"
 
 volumes:
   db-data:
