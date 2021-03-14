@@ -15,7 +15,7 @@ public class HistoryEvent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
     private Type type;
 
     @ManyToOne
